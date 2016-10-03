@@ -2,17 +2,17 @@
 
 cd /root/
 
-# install python 3.4
-wget http://python.org/ftp/python/3.4.4/Python-3.4.4.tar.xz
-tar xf Python-3.4.4.tar.xz
-cd Python-3.4.4
+# install python 3.5
+wget http://python.org/ftp/python/3.5.2/Python-3.5.2.tar.xz
+tar xf Python-3.5.2.tar.xz
+cd Python-3.5.2
 ./configure --prefix=/usr/local --enable-shared LDFLAGS="-Wl,-rpath /usr/local/lib" --with-zlib-dir=/usr/local/lib
 make && make install
 
 # устанавливаем pip
 cd ..
 wget https://bootstrap.pypa.io/get-pip.py
-python3.4 get-pip.py
+python3.5 get-pip.py
 python get-pip.py
 
 
@@ -22,44 +22,42 @@ cd /home/lamp/
 
 # создаем общую uwsgi
 mkdir .uwsgi && cd .uwsgi/
-pyvenv-3.4 python34
-source python34/bin/activate
+pyvenv-3.5 python35
+source python35/bin/activate
 pip install uwsgi
 deactivate
 
 
 # создаем тестовый проект
 cd /home/lamp/
-mkdir projects && cd projects
-pyvenv-3.4 onlyspin
-cd onlyspin
+mkdir projects
+cd projects
+pyvenv-3.5 wedoca
+cd wedoca
 source bin/activate
 cp /etc/nginx/uwsgi_params ./
-pip install --upgrade pip
+pip install --upgrade pip 
 pip install django
 
-# копируем config uwsgi
-cp /root/centos7/configs/onlyspin.ini ./
-django-admin.py startproject onlyspin
+django-admin.py startproject wedoca
 deactivate
-cd ..
-chown -R lamp:lamp onlyspin
+cd /home
+chown -R lamp:lamp lamp
 
-mkdir -p /etc/uwsgi/python34/vassals
-cd /etc/uwsgi/python34/vassals
-ln -s /home/lamp/projects/onlyspin/onlyspin.ini
+mkdir -p /etc/uwsgi/sites
+cd /etc/uwsgi/sites
+cp /root/centos7_deploy/configs/wedoca.ini ./
 
 cd /var/log/
 mkdir uwsgi
 chown lamp:lamp uwsgi
 
-echo '
-/home/lamp/.uwsgi/python34/bin/uwsgi --emperor /etc/uwsgi/python34/vassals/ --uid lamp --gid lamp
-' >> /etc/rc.local
+cd /run/
+mkdir uwsgi
+chown lamp:lamp uwsgi
 
-chmod a+x /etc/rc.local
+cd /etc/systemd/system
+cp /root/centos7_deploy/configs/uwsgi.service ./
 
-echo '' >> /etc/rc.local
-
-#это не срабатывает
-#echo 'systemctl stop iptables' >> /etc/rc.local
+systemctl start uwsgi
+systemctl enable uwsgi

@@ -1,17 +1,17 @@
-#!/bin/bash
+!/bin/bash
 
 # удаляем Apache если он есть
 yum remove -y httpd
-
-echo 'LANG=en_US.utf-8' >> /etc/environment
-echo 'LC_ALL=en_US.utf-8' >> /etc/environment
 
 # включить если установка идет на локальной машине, например в virtualBox
 #echo 'nameserver 8.8.8.8' > /etc/resolv.conf
 
 # Отключение Selinux
-setenforce 0
-sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+#setenforce 0
+#sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+
+echo 'LANG=en_US.utf-8' >> /etc/environment
+echo 'LC_ALL=en_US.utf-8' >> /etc/environment
 
 # Обновление
 yum update -y
@@ -24,10 +24,9 @@ yum install -y epel-release libjpeg-devel zlib-devel openssl openssl-devel sqlit
 yum update -y
 yum install -y htop
 
+# подключаем менеджер портов
 systemctl enable iptables
 systemctl start iptables
 
-cp /root/centos7/configs/iptables.firewall.rules /etc/iptables.firewall.rules
-iptables-restore < /etc/iptables.firewall.rules
-
+iptables-restore < cp /root/centos7_deploy/configs/iptables.firewall.rules
 /usr/libexec/iptables/iptables.init save

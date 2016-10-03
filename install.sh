@@ -10,14 +10,13 @@
 ./installers/python.sh
 
 # PostgreSql
-./installers/postgresql.sh
+#./installers/postgresql.sh
 
 # Sphinx
-./installers/sphinx.sh
+#./installers/sphinx.sh
 
 cd /root/
-rm -rf Python-3.4.4*
+rm -rf Python-3.5.2*
 rm -rf get-pip.py
-rm -rf CentOS-Base.repo.diff
 
 reboot
