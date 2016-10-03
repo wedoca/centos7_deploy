@@ -54,7 +54,6 @@ chown lamp:lamp uwsgi
 
 cd /run/
 mkdir uwsgi
-chown lamp:lamp uwsgi
 
 cd /etc/systemd/system
 cp /root/centos7_deploy/configs/uwsgi.service ./

@@ -2,6 +2,7 @@
 Description=uWSGI Emperor service
 
 [Service]
+ExecStartPre=/usr/bin/bash -c 'mkdir -p /run/uwsgi; chown lamp:lamp /run/uwsgi'
 ExecStart=/home/lamp/.uwsgi/python35/bin/uwsgi --emperor /etc/uwsgi/sites
 Restart=always
 KillSignal=SIGQUIT
@@ -10,4 +11,3 @@ NotifyAccess=all
 
 [Install]
 WantedBy=multi-user.target
-

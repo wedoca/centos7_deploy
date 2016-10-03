@@ -28,5 +28,5 @@ yum install -y htop
 systemctl enable iptables
 systemctl start iptables
 
-iptables-restore < cp /root/centos7_deploy/configs/iptables.firewall.rules
+iptables-restore < /root/centos7_deploy/configs/iptables.firewall.rules
 /usr/libexec/iptables/iptables.init save
