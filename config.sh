@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 
 # удаляем Apache если он есть
 yum remove -y httpd
