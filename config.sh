@@ -13,6 +13,9 @@ yum remove -y httpd
 echo 'LANG=en_US.utf-8' >> /etc/environment
 echo 'LC_ALL=en_US.utf-8' >> /etc/environment
 
+wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
+rpm -ivh epel-release-7-8.noarch.rpm
+
 # Обновление
 yum update -y
 
@@ -20,9 +23,13 @@ yum update -y
 yum -y groupinstall 'Development Tools'
 
 # необходимые утилиты для Python pip
-yum install -y epel-release libjpeg-devel zlib-devel openssl openssl-devel sqlite-devel net-tools mc wget curl git vim iptables-services
+yum install -y redis libjpeg-devel zlib-devel openssl openssl-devel sqlite-devel net-tools mc wget curl git vim iptables-services policycoreutils
 yum update -y
 yum install -y htop
+
+# установка redis как сервиса и его запуск
+systemctl start redis.service
+systemctl status redis.service
 
 # подключаем менеджер портов
 systemctl enable iptables

@@ -1,0 +1,9 @@
+CREATE DATABASE wedoca_db WITH ENCODING 'UTF8';
+CREATE USER wedoca_user WITH PASSWORD 'hqpvnexirmksd';
+
+ALTER ROLE wedoca_user SET client_encoding TO 'UTF8';
+ALTER ROLE wedoca_user SET default_transaction_isolation TO 'read committed';
+ALTER ROLE wedoca_user SET timezone TO 'Europe/Moscow';
+ALTER USER wedoca_user CREATEDB;
+
+GRANT ALL PRIVILEGES ON DATABASE wedoca_db TO wedoca_user;

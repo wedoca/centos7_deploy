@@ -1,0 +1,4 @@
+PATH=$PATH:/usr/pgsql-9.5/bin/ pip install psycopg2
+
+# pip install lxml
+yum install libxslt-devel libxml2-devel
