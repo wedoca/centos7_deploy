@@ -3,7 +3,7 @@ Description=uWSGI Emperor service
 
 [Service]
 ExecStartPre=/usr/bin/bash -c 'mkdir -p /run/uwsgi; chown lamp:lamp /run/uwsgi'
-ExecStart=/home/lamp/.uwsgi/python35/bin/uwsgi --emperor /etc/uwsgi/sites
+ExecStart=/home/lamp/.uwsgi/bin/uwsgi --emperor /etc/uwsgi/sites
 Restart=always
 KillSignal=SIGQUIT
 Type=notify

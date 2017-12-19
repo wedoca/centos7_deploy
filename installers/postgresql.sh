@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Предварительные настройки для использования более свежей версии
-yum install http://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-redhat95-9.5-2.noarch.rpm
+# Страница выбора версии https://www.postgresql.org/download/linux/redhat/
+yum install -y https://download.postgresql.org/pub/repos/yum/9.5/redhat/rhel-7-x86_64/pgdg-centos95-9.5-2.noarch.rpm
 
 # Установка
 yum install -y postgresql95-server postgresql95-devel postgresql95-contrib
